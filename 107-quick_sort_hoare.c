@@ -42,7 +42,7 @@ int hoare_partition(int *array, int low, int high)
 		}
 	}
 	swap(&array[i], &array[j]);
-	printf("Swap: ");
+	
 	for (k = low; k <= high; k++)
 	{
 		printf("%d ", array[k]);
@@ -67,20 +67,3 @@ void quick_sort_hoare(int *array, int low, int high)
 		quick_sort_hoare(array, pivot_index + 1, high);
 	}
 }
-
-/**
- * print_array - array to print
- * @array: array to sort from
- * @size: size of the array
- */
-void print_array(int *array, size_t size)
-{
-	size_t i;
-
-	for (i = 0; i < size; i++)
-	{
-		printf("%d ", array[i]);
-	}
-	printf("\n");
-}
-
