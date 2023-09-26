@@ -1,10 +1,9 @@
 #include "sort.h"
-#include <stdio.h>
 
 /**
  * swap - swap variables
- * @a: first letter
- * @b: second letter
+ * @a: var a
+ * @b: var b
  */
 void swap(int *a, int *b)
 {
@@ -13,12 +12,11 @@ void swap(int *a, int *b)
 	*a = *b;
 	*b = temp;
 }
-
 /**
- * hoare_partition - sorts algorithm quick
+ * hoare_partition - sort an algorithm
  * @array: array to sort from
- * @low:  low array
- * @high: top array
+ * @low: first element
+ * @high: last element
  * Return: j
  */
 int hoare_partition(int *array, int low, int high)
@@ -26,7 +24,6 @@ int hoare_partition(int *array, int low, int high)
 	int pivot = array[high];
 	int i = low - 1;
 	int j = high + 1;
-	int k;
 
 	while (1)
 	{
@@ -40,30 +37,42 @@ int hoare_partition(int *array, int low, int high)
 		{
 			return (j);
 		}
+		swap(&array[i], &array[j]);
 	}
-	swap(&array[i], &array[j]);
-	
-	for (k = low; k <= high; k++)
-	{
-		printf("%d ", array[k]);
-	}
-	printf("\n");
 }
-
 /**
- * quick_sort_hoare - function that sorts the algorithm quick
+ * quick_sort_hoare - sort an algorithm quickly
  * @array: array to sort from
- * @high: high array
- * @low: low array
+ * @size: size of the array
  */
-void quick_sort_hoare(int *array, int low, int high)
+void quick_sort_hoare(int *array, size_t size)
 {
+	int low = 0;
+	int high = size - 1;
+	int stash[size];
+	int above = -1;
 	int pivot_index;
 
-	if (low < high)
+	if (size <= 1)
 	{
+		return;
+	}
+	stash[++above] = low;
+	stash[++above] = high;
+	while (above >= 0)
+	{
+		high = stash[above--];
+		low = stash[above--];
 		pivot_index = hoare_partition(array, low, high);
-		quick_sort_hoare(array, low, pivot_index);
-		quick_sort_hoare(array, pivot_index + 1, high);
+		if (pivot_index - 1 > low)
+		{
+			stash[++above] = low;
+			stash[++above] = pivot_index - 1;
+		}
+		if (pivot_index + 1 < high)
+		{
+			stash[++above] = pivot_index + 1;
+			stash[++above] = high;
+		}
 	}
 }
