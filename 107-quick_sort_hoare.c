@@ -49,7 +49,7 @@ void quick_sort_hoare(int *array, size_t size)
 {
 	int low = 0;
 	int high = size - 1;
-	int *stash = (int*)malloc(2 * size * sizeof(int));
+	int *stash = (int *)malloc(2 * size * sizeof(int));
 	int above = -1;
 	int pivot_index;
 
