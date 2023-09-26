@@ -1,4 +1,8 @@
 #include "sort.h"
+
+void shell_sort(int *array, size_t size);
+void _ssort(int *a, int size, int n);
+
 /**
  * shell_sort - function that sorts an array
  * of integers in ascending order using the
